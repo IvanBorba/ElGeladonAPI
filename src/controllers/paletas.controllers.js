@@ -4,9 +4,13 @@ const paletasServices = new PaletasServices();
 
 class PaletasControllers {
   listarTodas(request, response) {
-    const paletas = paletasServices.listarTodas();
+    try {
+      const paletas = paletasServices.listarTodas();
 
-    response.send(paletas);
+      response.send(paletas);
+    } catch (error) {
+      response.status(error.status).send(error.message);
+    }
   }
 
   listarUmaPaletaPorId(request, response) {
@@ -28,6 +32,29 @@ class PaletasControllers {
     });
 
     response.status(201).send(novaPaleta);
+  }
+
+  atualizarPaleta(request, response) {
+    const { sabor, descricao, foto, preco } = request.body;
+    const id = +request.params.id;
+
+    const paletaAtualizada = paletasServices.atualizarPaleta({
+      sabor,
+      descricao,
+      foto,
+      preco,
+      id,
+    });
+
+    response.send(paletaAtualizada);
+  }
+
+  excluirPaleta(request, response) {
+    const id = +request.params.id;
+
+    paletasServices.excluirPaleta(id);
+
+    response.sendStatus(204);
   }
 }
 

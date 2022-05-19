@@ -1,8 +1,6 @@
+import paletasRouter from './routes/paletas.routes';
 import express from 'express';
 import cors from 'cors';
-import paletasRouter from './routes/paletas.routes';
-
-const port = 3000;
 
 const app = express();
 
@@ -15,6 +13,4 @@ app.get('/', (request, response) => {
 
 app.use('/paletas', paletasRouter);
 
-app.listen(port, () => {
-  console.log(`A aplicação está rodando na porta http://localhost:${port}`);
-});
+export default app;

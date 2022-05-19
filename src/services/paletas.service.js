@@ -2,6 +2,10 @@ import paletas from '../database';
 
 class PaletasServices {
   listarTodas() {
+    if (paletas.length === 0) {
+      throw { status: 404, message: 'Nenhuma paleta encontrada' };
+    }
+
     return paletas;
   }
 
@@ -13,7 +17,7 @@ class PaletasServices {
 
   criarNovaPaleta({ sabor, descricao, foto, preco }) {
     const novaPaleta = {
-      id: paletas.length + 1,
+      id: paletas[paletas.length - 1].id + 1,
       sabor,
       descricao,
       foto,
@@ -24,15 +28,28 @@ class PaletasServices {
 
     return novaPaleta;
   }
+
+  atualizarPaleta({ sabor, descricao, foto, preco, id }) {
+    const paletaAtualizada = {
+      id,
+      sabor,
+      descricao,
+      foto,
+      preco,
+    };
+
+    const paletaIndex = paletas.findIndex((elem) => elem.id === id);
+
+    paletas[paletaIndex] = paletaAtualizada;
+
+    return paletaAtualizada;
+  }
+
+  excluirPaleta({ id }) {
+    const paletaIndex = paletas.findIndex((elem) => elem.id === id);
+
+    paletas.splice(paletaIndex, 1);
+  }
 }
 
 export default PaletasServices;
-
-// {
-//   id: 1,
-//   sabor: 'Açaí com Leite Condensado',
-//   descricao:
-//     'Quam vulputate dignissim suspendisse in est ante in nibh mauris.',
-//   foto: 'assets/images/acai-com-leite-condensado.png',
-//   preco: 10.0,
-// }
