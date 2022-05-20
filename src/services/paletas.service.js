@@ -16,8 +16,11 @@ class PaletasServices {
   }
 
   criarNovaPaleta({ sabor, descricao, foto, preco }) {
+    const novoId =
+      paletas.length === 0 ? 1 : paletas[paletas.length - 1].id + 1;
+
     const novaPaleta = {
-      id: paletas[paletas.length - 1].id + 1,
+      id: novoId,
       sabor,
       descricao,
       foto,
