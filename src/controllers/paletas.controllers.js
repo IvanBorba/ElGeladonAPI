@@ -24,29 +24,41 @@ class PaletasControllers {
   async criarNovaPaleta(request, response) {
     const { sabor, descricao, foto, preco } = request.body;
 
-    const novaPaleta = await paletasServices.criarNovaPaleta({
-      sabor,
-      descricao,
-      preco,
-      foto,
-    });
+    try {
+      const novaPaleta = await paletasServices.criarNovaPaleta({
+        sabor,
+        descricao,
+        preco,
+        foto,
+      });
 
-    response.status(201).send(novaPaleta);
+      response.status(201).send(novaPaleta);
+    } catch (error) {
+      if (error.code === 11000) {
+        response.status(400).send('Sabor já cadastrado');
+      }
+    }
   }
 
   async atualizarPaleta(request, response) {
     const { sabor, descricao, foto, preco } = request.body;
     const id = request.params.id;
 
-    const paletaAtualizada = await paletasServices.atualizarPaleta({
-      sabor,
-      descricao,
-      foto,
-      preco,
-      id,
-    });
+    try {
+      const paletaAtualizada = await paletasServices.atualizarPaleta({
+        sabor,
+        descricao,
+        foto,
+        preco,
+        id,
+      });
 
-    response.send(paletaAtualizada);
+      response.send(paletaAtualizada);
+    } catch (error) {
+      if (error.code === 11000) {
+        response.status(400).send('Sabor já cadastrado');
+      }
+    }
   }
 
   async excluirPaleta(request, response) {
