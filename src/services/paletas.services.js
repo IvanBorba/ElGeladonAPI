@@ -12,7 +12,7 @@ class PaletasServices {
   }
 
   async listarUmaPaletaPorId({ id }) {
-    const paletaSelecionada = await Paleta.findById(id).exec();
+    const paletaSelecionada = await Paleta.findById(id);
 
     return paletaSelecionada;
   }
