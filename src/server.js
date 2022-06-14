@@ -1,7 +1,7 @@
 import app from './app';
 import { conectarAoDatabase } from './database';
 
-const port = 3000;
+const port = 8080;
 
 app.listen(port, () => {
   conectarAoDatabase();
