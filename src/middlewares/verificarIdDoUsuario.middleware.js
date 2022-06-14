@@ -1,4 +1,4 @@
-import Usuario from '../models/usuarios.model';
+import Usuario from '../models/usuarios.model.js';
 import mongoose from 'mongoose';
 
 const verificarIdDoUsuarioMiddleware = async (request, response, next) => {

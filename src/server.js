@@ -1,10 +1,12 @@
 import 'dotenv/config';
-import app from './app';
-import { conectarAoDatabase } from './database';
+import app from './app.js';
+import { conectarAoDatabase } from './database/index.js';
 
-app.listen(process.env.PORT, () => {
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
   conectarAoDatabase();
-  console.log(
-    `A aplicação está rodando na porta http://localhost:${process.env.PORT}`,
-  );
+  if (!process.env.PORT) {
+    console.log(`A aplicação está rodando na porta http://localhost:${port}`);
+  }
 });

@@ -1,4 +1,4 @@
-import LoginServices from '../services/login.services';
+import LoginServices from '../services/login.services.js';
 
 const loginServices = new LoginServices();
 
